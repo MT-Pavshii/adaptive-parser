@@ -1,0 +1,11 @@
+{
+    "mosmedportal": {
+      "base_url": "https://www.mosmedportal.ru/doctors/?PAGEN_1=",
+      "pages": 5,
+      "tags": {
+        "item": "div.doctor-card",
+        "title": "a.doctor-card--name",
+        "phone": "a.phone-link"
+      }
+    } 
+  }
