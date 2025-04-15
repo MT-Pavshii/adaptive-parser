@@ -21,8 +21,8 @@
 ## Установка
 
 1. Клонируйте репозиторий:
-git clone https://github.com/yourusername/yourrepository.git
-cd yourrepository
+git clone https://github.com/MT-Pavshii/adaptive-parser.git
+cd adaptive-parser
 2. Установите зависимость
 pip install -r requirements.txt
 Убедитесь, что используете Python 3.7+
