@@ -34,25 +34,29 @@ pip install -r requirements.txt
 python main.py
 3. Результат сохраняется сразу в двух форматах json и csv внутри папки utils.
 
-## Конфигурация
+Пример конфигурации:
 
-Файл config.json позволяет адаптиролвать любой сайт без динамического обновления. изменяя только селекторы и URL. 
-Имеется возможность добавления нескольких источников для парсинга
-
-Пример:
+```json
 {
-    "quotes": {
+    "mosmedportal": {
         "base_url": "https://www.mosmedportal.ru/doctors/?PAGEN_1=",
         "pages": 5,
         "tags": {
-            "item": "div.doctor-card--middle",
+            "item": "div.doctor-card",
             "title": "a.doctor-card--name",
             "phone": "a.phone-link"
         }
+    },
+    "books": {
+        "base_url": "http://books.toscrape.com/catalogue/page-",
+        "pages": 5,
+        "tags": {
+            "item": "article.product_pod",
+            "title": "h3 a",
+            "price": "p.price_color"
+        }
     }
 } 
-
-На данный момент парсер настроен на сайт врачей для проверки его работы. 
 
 ## Описание параметров 
 
