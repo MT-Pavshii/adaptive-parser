@@ -36,7 +36,7 @@ def get_data_from_site(base_url, pages, tags):
                 if key in ['item', 'title']:
                     continue  
 
-                tag = item.select_one(selector) # Блок для добовления специальных условий
+                tag = item.select_one(selector) # Блок для добавления специальных условий
                 if tag:
                     if key == 'phone' and tag.has_attr('href'):
                         result[key] = tag.get('href').replace('tel:', '')
