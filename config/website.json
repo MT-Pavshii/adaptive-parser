@@ -5,7 +5,7 @@
       "tags": {
         "item": "div.doctor-card",
         "title": "a.doctor-card--name",
-        "phone": "a.phone-link"
+        "phone": "a.phone-link"        
       }
     } 
   }

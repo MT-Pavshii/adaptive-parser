@@ -3,12 +3,11 @@ from bs4 import BeautifulSoup
 
 def get_data_from_site(base_url, pages, tags):
     data = []
-
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     }
 
-    print("Ищем элементы по селектору:", tags['item'])
+    print("Ищем элементы по селектору:", tags.get('item'))
 
     for page in range(1, pages + 1):
         url = f"{base_url}{page}"
@@ -23,24 +22,31 @@ def get_data_from_site(base_url, pages, tags):
         print(f"Найдено {len(items)} элементов на странице {page}")
 
         for item in items:
-            title = 'Без имени'
-            link = 'Без ссылки'
+            result = {}
 
-            title_tags = item.select(tags['title'])
-            for tag in title_tags:
-                if tag.text.strip():
-                    title = tag.get_text(strip=True)
-                    link = tag.get('href') if tag.has_attr('href') else 'Без ссылки'
-                    break
+            title_tag = item.select_one(tags.get('title', ''))
+            if title_tag:
+                result['title'] = title_tag.get_text(strip=True)
+                result['link'] = title_tag.get('href', 'Без ссылки') if title_tag.has_attr('href') else 'Без ссылки'
+            else:
+                result['title'] = 'Без имени'
+                result['link'] = 'Без ссылки'
 
-            phone_tag = item.select_one(tags.get('phone', ''))
-            phone = phone_tag.get('href').replace('tel:', '') if phone_tag and phone_tag.has_attr('href') else 'Без телефона'
+            for key, selector in tags.items():
+                if key in ['item', 'title']:
+                    continue  
 
-            data.append({
-                'title': title,
-                'link': link,
-                'phone': phone
-            })
+                tag = item.select_one(selector) # Блок для добовления специальных условий
+                if tag:
+                    if key == 'phone' and tag.has_attr('href'):
+                        result[key] = tag.get('href').replace('tel:', '')
+                    else:
+                        result[key] = tag.get_text(strip=True)
+                else:
+                    result[key] = f"Без {key}"
+
+            data.append(result)
 
     return data
+
 
